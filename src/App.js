@@ -1,4 +1,4 @@
-// Frontend for UPI Intent Payment Integration
+// Frontend for UPI Intent Payment Integration with Order Confirmation
 
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -10,6 +10,7 @@ function App() {
   const [name, setName] = useState('');
   const [transactionNote, setTransactionNote] = useState('');
   const [paymentLink, setPaymentLink] = useState('');
+  const [orderId, setOrderId] = useState('');
 
   const handlePayment = async (e) => {
     e.preventDefault();
@@ -21,9 +22,25 @@ function App() {
         transactionNote,
       });
       setPaymentLink(response.data.paymentLink);
+      setOrderId(response.data.orderId);
       alert('Payment link generated!');
     } catch (error) {
       alert('Error generating payment link');
+    }
+  };
+
+  const checkOrderStatus = async () => {
+    try {
+      const response = await axios.get(`https://backend-upi.onrender.com/api/order/${orderId}`);
+      const { status } = response.data.order;
+
+      if (status === 'success') {
+        alert('Order Placed Successfully!');
+      } else {
+        alert('Payment Pending or Failed. Please try again.');
+      }
+    } catch (error) {
+      alert('Error checking order status');
     }
   };
 
@@ -64,7 +81,7 @@ function App() {
       {paymentLink && (
         <div className="result">
           <h2>Payment Link</h2>
-          <a href={paymentLink} target="_blank" rel="noopener noreferrer">
+          <a href={paymentLink} target="_blank" rel="noopener noreferrer" onClick={checkOrderStatus}>
             Pay Now
           </a>
         </div>
