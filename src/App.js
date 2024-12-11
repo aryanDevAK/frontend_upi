@@ -14,7 +14,7 @@ function App() {
   const handlePayment = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/pay', {
+      const response = await axios.post('https://backend-upi.onrender.com/api/pay', {
         amount,
         upiId,
         name,
