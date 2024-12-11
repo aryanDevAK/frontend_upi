@@ -1,0 +1,45 @@
+/* App.css */
+.container {
+  text-align: center;
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 600px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1,
+h2 {
+  color: #333;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.payment-form input,
+.payment-form button {
+  padding: 10px 15px;
+  font-size: 16px;
+}
+
+.payment-form button {
+  background: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.payment-form button:hover {
+  background: #0056b3;
+}
+
+.result a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
